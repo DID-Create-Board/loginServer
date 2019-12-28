@@ -9,6 +9,7 @@
       Request Verify DID Document by STORE,<br />
       Give the module a second to load...
     </div>
+
     <script type="text/javascript">
       //////////////////////////////
       //  Configure connect object
@@ -27,7 +28,12 @@
         json = JSON.stringify(res.payload)
         console.log(json)
         document.querySelector('#msg').innerHTML = "Congratulations you are now `logged in`.  Here is the response:  " + json
-      })
+        if(json){
+          setTimeout(function(){
+            location.href="/storeinfo";
+          },3000);
+        }
+      });
      </script>
     </script>
   </body>

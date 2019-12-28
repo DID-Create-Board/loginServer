@@ -1,7 +1,7 @@
 {
   "name": "mans",
   "version": "1.0.0",
-  "description": "",
+  "description": "config파일 아래 config.js을 만들어서 사용하여야 합니다.",
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -22,9 +22,18 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HippoMans/loginProject.git"
+  },
+  "bugs": {
+    "url": "https://github.com/HippoMans/loginProject/issues"
+  },
+  "homepage": "https://github.com/HippoMans/loginProject#readme"
 }

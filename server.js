@@ -19,7 +19,7 @@ app.use(express.static(__dirname+'/public'));
 
 //config모듈을 사용
 var config = require('./config/config');
-var port = config.server_port || 5000;
+var port = config.server_port || 6000;
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var expressSession = require('express-session');
@@ -71,7 +71,7 @@ function connectDB(){
 
 function createUserShema(database){
     database.UserSchema = require('./database/user_schema').createSchema(mongoose);
-    database.UserModel = mongoose.model('users', database.UserSchema);
+    database.UserModel = mongoose.model('store', database.UserSchema);
     console.log('UserModel 정의함.');
 }
 
@@ -210,24 +210,24 @@ router.route('/indexlogin').get(function(req, res){
     res.render('indexlogin.ejs',{username:req.user.name});
 });
 
-router.route('/profile').get(function(req, res){
-    console.log('/profile 패스로 GET 요청됨.');
-    console.log('req.user 객체 정보');
-    console.dir(req.user);
+// router.route('/profile').get(function(req, res){
+//     console.log('/profile 패스로 GET 요청됨.');
+//     console.log('req.user 객체 정보');
+//     console.dir(req.user);
 
-    if(!req.user){
-        console.log('사용자 인증 안된 상태임.');
-        res.redirect('/');
-    }else{
-        console.log('사용자 인증된 상태임.');
+//     if(!req.user){
+//         console.log('사용자 인증 안된 상태임.');
+//         res.redirect('/');
+//     }else{
+//         console.log('사용자 인증된 상태임.');
 
-        if(Array.isArray(req.user)){
-            res.render('profile.ejs', {user:req.user[0]._doc});
-        }else{
-            res.render('profile.ejs', {user:req.user});
-        }
-    }
-});
+//         if(Array.isArray(req.user)){
+//             res.render('profile.ejs', {user:req.user[0]._doc});
+//         }else{
+//             res.render('profile.ejs', {user:req.user});
+//         }
+//     }
+// });
 
 router.route('/logout').get(function(req, res){
     console.log('/logout 패스로 GET 요청됨.');
@@ -235,35 +235,35 @@ router.route('/logout').get(function(req, res){
     res.redirect('/');
 });
 
-  // 인증기관 claim요청 및 doc받기
-router.route('/userauth-dids').get(async function(req, res) {
-    res.render('userauth-dids.ejs');
-    console.log('/userauth-dids');
+//   // 인증기관 claim요청 및 doc받기
+// router.route('/userauth-dids').get(async function(req, res) {
+//     res.render('userauth-dids.ejs');
+//     console.log('/userauth-dids');
 
-    await ngrok.disconnect();
+//     await ngrok.disconnect();
 
-    // run the app server and tunneling service
-    ngrok.connect(8088).then(ngrokUrl => {
-      endpoint = ngrokUrl;
-      console.log(
-        `Your dApp is being served!, open at ${endpoint} and scan the QR to login!`
-      );
-    });
-  });
+//     // run the app server and tunneling service
+//     ngrok.connect(8088).then(ngrokUrl => {
+//       endpoint = ngrokUrl;
+//       console.log(
+//         `Your dApp is being served!, open at ${endpoint} and scan the QR to login!`
+//       );
+//     });
+//   });
 
-// user to 매장
-router.route('/usersendverify').get(function(req, res) {
-    res.render('usersendverify.ejs');
-    console.log('/usersendverify');
+// // user to 매장
+// router.route('/usersendverify').get(function(req, res) {
+//     res.render('usersendverify.ejs');
+//     console.log('/usersendverify');
 
-    // run the app server and tunneling service
-    ngrok.connect(8088).then(ngrokUrl => {
-      endpoint = ngrokUrl;
-      console.log(
-        `Your dApp is being served!, open at ${endpoint} and scan the QR to login!`
-      );
-    });
-  });
+//     // run the app server and tunneling service
+//     ngrok.connect(8088).then(ngrokUrl => {
+//       endpoint = ngrokUrl;
+//       console.log(
+//         `Your dApp is being served!, open at ${endpoint} and scan the QR to login!`
+//       );
+//     });
+//   });
 
   router.route('/store-reqverify').get(function(req, res) {
     res.render('store-reqverify.ejs');
@@ -278,10 +278,16 @@ router.route('/usersendverify').get(function(req, res) {
     });
   });
 
-// 매장 to user
-router.route('/login').get(function(req, res) {
-    res.render('login.ejs');
-    console.log('/login');
+// // 매장 to user
+// router.route('/login').get(function(req, res) {
+//     res.render('login.ejs');
+//     console.log('/login');
+//   });
+
+//매장에서 인증
+  router.route('/storeinfo').get(function(req, res) {
+    res.render('storeinfo.ejs');
+    console.log('/storeinfo');
   });
 
 
