@@ -1,3 +1,7 @@
+
+
+해당 코드에 security vulnerabilities  발견되어 일부 repo 정리합니다. 양해바랍니다.
+
 # loginProject
 config파일 아래 config.js을 만들어서 사용하여야 합니다.
 
